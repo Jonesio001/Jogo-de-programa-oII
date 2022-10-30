@@ -1,0 +1,4 @@
+teste_jogo_matematica.depend
+teste_jogo_matematica.layout
+obj/
+bin/
