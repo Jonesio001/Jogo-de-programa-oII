@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1666990866 source:e:\programacao\teste_jogo_matematica\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1666991560 source:e:\programacao\teste\testeporg.c
+	<stdio.h>
+	<stdlib.h>
+
