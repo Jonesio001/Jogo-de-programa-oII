@@ -14,11 +14,13 @@ void main()
     char comando;
     int movimentoRealizado;
 
+    int ai = 5, aj = 7;
+
     for( ; ; )
     {
         system("CLS");
 
-        if(pi != 5 && pj != 7 || pi == 5 && pj !=7 || pi != 5 && pj ==7 )
+        if(pi != ai && pj != aj || pi == ai && pj !=aj || pi != ai && pj ==aj )
         {
 
             for(int i=0; i<linha; i++)
@@ -31,11 +33,15 @@ void main()
                     }
                     else if(i>0 && j>0 && i<linha-1 && j<coluna-1)
                     {
-                        if( i==pi+1 && j==pj   || i==pi+1 && j==pj+1 || i==pi+1 && j==pj-1 ||
-                                i==pi-1 && j==pj   || i==pi-1 && j==pj+1 || i==pi-1 && j==pj-1 ||
-                                i==pi   && j==pj+1 || i==pi && j==pj-1)
+                        if( i==pi+1 && j==pj || i==pi+1 && j==pj+1 || i==pi+1 && j==pj-1 ||
+                            i==pi-1 && j==pj   || i==pi-1 && j==pj+1 || i==pi-1 && j==pj-1 ||
+                            i==pi   && j==pj+1 || i==pi && j==pj-1)
                         {
+                            if (i == ai && j == aj){
+                                printf(" ,");
+                            } else {
                             printf(" .");
+                            }
                         }
                         else
                         {
