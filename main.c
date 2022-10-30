@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <conio.h>
 
 #define coluna 20
 #define linha 10
@@ -83,7 +84,8 @@ void main()
         }
         printf("Comando: w (cima)\td (direita)\ts (baixo)\ta (esquerda)\n");
         printf("Digite um comando: ");
-        scanf(" %c", &comando);
+        comando = getch();
+
 
         movimentoRealizado = 1;
         switch(comando)
