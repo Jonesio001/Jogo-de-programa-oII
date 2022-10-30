@@ -5,51 +5,73 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define coluna 50
-#define linha 25
+#define coluna 20
+#define linha 10
 
 void main()
 {
-    int pi=13, pj=1;
+    int pi=1, pj=1;
     char comando;
     int movimentoRealizado;
 
-    for(;;)
+    for( ; ; )
     {
         system("CLS");
 
-        for(int i=0; i<linha; i++)
+        if(pi != 5 && pj != 7 || pi == 5 && pj !=7 || pi != 5 && pj ==7 )
         {
-            for(int j=0; j<coluna; j++)
+
+            for(int i=0; i<linha; i++)
             {
-                if(i==pi && j==pj)
+                for(int j=0; j<coluna; j++)
                 {
-                    printf(" P");
-                }
-                else if(i>0 && j>0 && i<linha-1 && j<coluna-1)
-                {
-                    if( i==pi+1 && j==pj   || i==pi+1 && j==pj+1 || i==pi+1 && j==pj-1 ||
-                            i==pi-1 && j==pj   || i==pi-1 && j==pj+1 || i==pi-1 && j==pj-1 ||
-                            i==pi   && j==pj+1 || i==pi && j==pj-1)
+                    if(i==pi && j==pj)
                     {
-                        printf(" .");
+                        printf(" P");
+                    }
+                    else if(i>0 && j>0 && i<linha-1 && j<coluna-1)
+                    {
+                        if( i==pi+1 && j==pj   || i==pi+1 && j==pj+1 || i==pi+1 && j==pj-1 ||
+                                i==pi-1 && j==pj   || i==pi-1 && j==pj+1 || i==pi-1 && j==pj-1 ||
+                                i==pi   && j==pj+1 || i==pi && j==pj-1)
+                        {
+                            printf(" .");
+                        }
+                        else
+                        {
+                            printf("  ");
+                        }
+                    }
+                    else if(i==0 && pi==1 && j==pj || i==0 && pi==1 && j==pj-1 || i==0 && pi==1 && j==pj+1 ||
+                            j==0 && pj==1 && i==pi || j==0 && pj==1 && i==pi-1 || j==0 && pj==1 && i==pi+1 ||
+                            j==coluna-1 && pj==coluna-2 && i==pi || j==coluna-1 && pj==coluna-2 && i==pi-1 || j==coluna-1 && pj==coluna-2 && i==pi+1 ||
+                            i==linha-1 && pi==linha-2 && j==pj || i==linha-1 && pi==linha-2 && j==pj-1 || i==linha-1 && pi==linha-2 && j==pj+1)
+                    {
+                        printf(" #");
                     }
                     else
                     {
-                        printf(" ");
+                        printf("  ");
                     }
                 }
-                else if(i==0 && pi==1 && j==pj || i==0 && pi==1 && j==pj-1 || i==0 && pi==1 && j==pj+1 ||
-                        j==0 && pj==1 && i==pi || j==0 && pj==1 && i==pi-1 || j==0 && pj==1 && i==pi+1 ||
-                        j==coluna-1 && pj==coluna-2 && i==pi || j==coluna-1 && pj==coluna-2 && i==pi-1 || j==coluna-1 && pj==coluna-2 && i==pi+1 ||
-                        i==linha-1 && pi==linha-2 && j==pj || i==linha-1 && pi==linha-2 && j==pj-1 || i==linha-1 && pi==linha-2 && j==pj+1)
+                printf("\n");
+            }
+
+        }
+        else
+        {
+            for (int i = 0; i < linha; i++)
+            {
+                for (int j = 0; j < coluna; j++)
                 {
-                    printf(" #");
+                    if (i == 0 || j == 0 || j == coluna - 1 || i == linha - 1)
+                        printf(" #");
+                    else if (j == pj && i == pi)
+                        printf(" P");
+                    else
+                        printf(" .");
                 }
-                else
-                {
-                    printf(" ");
-                }
+                printf("\n");
             }
             printf("\n");
         }
