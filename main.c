@@ -9,7 +9,7 @@
 #define coluna 20
 #define linha 10
 
-void desenhaMapaNoEscuro(int pi, int pj, int ai, int aj)
+int desenhaMapaNoEscuro(int pi, int pj, int ai, int aj)
 {
     for(int i=0; i<linha; i++)
     {
@@ -53,6 +53,8 @@ void desenhaMapaNoEscuro(int pi, int pj, int ai, int aj)
         }
         printf("\n");
     }
+    printf("Comando: w (cima)\td (direita)\ts (baixo)\ta (esquerda)\n");
+    printf("Digite um comando: ");
 }
 
 void desenhaMapaComLuz(int pi, int pj)
@@ -72,74 +74,66 @@ void desenhaMapaComLuz(int pi, int pj)
     }
     printf("\n");
 
+    printf("Comando: w (cima)\td (direita)\ts (baixo)\ta (esquerda)\n");
+    printf("Digite um comando: ");
+
 }
 
-
-void desenhaMapa(int pi, int pj)
+int fazPerguntas()
 {
-    int ai = 5, aj = 7;
-    if(pi != ai && pj != aj || pi == ai && pj !=aj || pi != ai && pj ==aj )
-        desenhaMapaNoEscuro(pi, pj, ai, aj);
-    else
-        desenhaMapaComLuz(pi, pj);
-}
-
-void main()
-{
-    int pi=1, pj=1;
-    char comando;
-    int movimentoRealizado;
-
-
-
-    for( ; ; )
+    char resposta;
+    int correta;
+    printf("Pergunta 1 \n");
+    scanf("%c", &resposta);
+    if (resposta == 'a')
     {
-        system("CLS");
+        printf("Resposta Correta");
+        correta = 1;
+    }
+    else
+        correta = 0;
 
-        desenhaMapa(pi, pj);
+    return correta;
+}
 
 
-
-        printf("Comando: w (cima)\td (direita)\ts (baixo)\ta (esquerda)\n");
-        printf("Digite um comando: ");
-        comando = getch();
-
-
-        movimentoRealizado = 1;
+void movimentaPersonagem(char comando, int*pi, int*pj)
+{
+        int movimentoRealizado = 1;
         switch(comando)
         {
         case 'w':
-            pi = pi - 1;
-            if (pi < 1)
+            *pi = *pi - 1;
+            if (*pi < 1)
             {
-                pi = 1;
+                *pi = 1;
                 movimentoRealizado = 0;
             }
             break;
 
         case 's':
-            pi += 1;
-            if (pi >= linha - 1)
+            *pi += 1;
+            if (*pi >= linha - 1)
             {
-                pi = linha - 2;
+                *pi = linha - 2;
                 movimentoRealizado = 0;
             }
             break;
 
         case 'a':
-            pj -= 1;
-            if (pj < 1)
+            *pj -= 1;
+            if (*pj < 1)
             {
-                pj = 1;
+                *pj = 1;
                 movimentoRealizado = 0;
             }
             break;
 
         case 'd':
-            pj += 1;
-            if (pj >= coluna - 1)
+            *pj += 1;
+            if (*pj >= coluna - 1)
             {
-                pj = coluna - 2;
+                *pj = coluna - 2;
                 movimentoRealizado = 0;
             }
             break;
@@ -150,5 +144,62 @@ void main()
             printf("Pressione uma tecla para continuar!\n");
             system("PAUSE");
         }
+}
+
+void criaDisjuntor(int*ai, int*aj, int pi, int pj){
+
+    srand(time(NULL));
+
+    for ( ; ; ){
+        *ai = rand();
+        if(*ai>0 && *ai <linha-1 && *ai != pi)
+            break;
+    }
+
+    for ( ; ; ){
+        *aj = rand();
+        if(*aj>0 && *aj<coluna-1 && *aj!= pj)
+            break;
+    }
+
+}
+
+
+void main()
+{
+    int pi=1, pj=1;
+    char comando;
+    int movimentoRealizado;
+    int ai = 5, aj = 7, proximo = 0, cont = 0;
+
+
+
+    for( ; ; )
+    {
+
+        system("CLS");
+
+        while(proximo == 0)
+        {
+
+            if(pi != ai && pj != aj || pi == ai && pj !=aj || pi != ai && pj ==aj)
+            {
+                system("CLS");
+                desenhaMapaNoEscuro(pi, pj, ai, aj);
+                movimentaPersonagem(getch(), &pi, &pj);
+
+            }
+            else {
+                fflush(stdin);
+                proximo = fazPerguntas();
+                criaDisjuntor(&ai, &aj, pi, pj);
+            }
+        }
+
+        system("CLS");
+
+        desenhaMapaComLuz(pi, pj);
+        movimentaPersonagem(getch(), &pi, &pj);
+
     }
 }
